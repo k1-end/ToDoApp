@@ -36,7 +36,23 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request , [
+            'new_todo_title' => 'required',
+            'new_todo_due' => 'required',
+            'new_todo_content' => 'required',
+        ],[
+            'new_todo_title.required' => 'Title is required.',
+            'new_todo_due.required' => 'Due is required.',
+            'new_todo_content.required' => 'Content is required.',
+        ]);
+
+        $todo = new \App\Models\Todo();
+        $todo->title = $request->input('new_todo_title');
+        $todo->due = $request->input('new_todo_due');
+        $todo->content = $request->input('new_todo_content');
+        $todo->save();
+
+        return redirect('/')->with('success' , 'Todo created successfully!');
     }
 
     /**
