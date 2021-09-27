@@ -76,7 +76,8 @@ class TodoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $todo = \App\Models\Todo::find($id);
+        return view('edit')->with('todo',$todo);
     }
 
     /**
@@ -88,7 +89,23 @@ class TodoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request , [
+            'new_todo_title' => 'required',
+            'new_todo_due' => 'required',
+            'new_todo_content' => 'required',
+        ],[
+            'new_todo_title.required' => 'Title is required.',
+            'new_todo_due.required' => 'Due is required.',
+            'new_todo_content.required' => 'Content is required.',
+        ]);
+
+        $todo = \App\Models\Todo::find($id);
+        $todo->title = $request->input('new_todo_title');
+        $todo->due = $request->input('new_todo_due');
+        $todo->content = $request->input('new_todo_content');
+        $todo->save();
+
+        return redirect('/')->with('success' , 'Todo updated successfully!');
     }
 
     /**
@@ -99,6 +116,9 @@ class TodoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $todo = \App\Models\Todo::find($id);
+        $todo->delete();
+        return redirect('/')->with('success' , 'Todo deleted successfully!');
+
     }
 }
