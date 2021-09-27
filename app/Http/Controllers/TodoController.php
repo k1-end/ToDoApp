@@ -47,7 +47,9 @@ class TodoController extends Controller
      */
     public function show($id)
     {
-        //
+        $todo = \App\Models\Todo::find($id);
+
+        return view('show')->with('todo',$todo);
     }
 
     /**

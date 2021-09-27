@@ -4,7 +4,7 @@
     @if(count($todos) > 0)
         @foreach($todos as $t)
             <div class="card">
-                <h2>{{$t->title}}</h2>
+                <h2><a href="/todo/{{$t->id}}">{{$t->title}}</a></h2>
                 <section>{{$t->content}}</section>
                 <span class="label label-danger">{{$t->due}}</span>
             </div>
