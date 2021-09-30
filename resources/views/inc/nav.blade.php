@@ -8,6 +8,9 @@
       <li class="nav-item<?php echo ($route->uri == '/todo/create')? "active" : ""  ;?>">
         <a class="nav-link" href="/todo/create">Create</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">Logout</a>
+      </li>
       
     </ul>
   </div>

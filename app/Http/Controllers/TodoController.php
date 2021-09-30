@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 
 class TodoController extends Controller
 {
@@ -14,7 +15,9 @@ class TodoController extends Controller
      */
     public function index()
     {
-        $todos = \App\Models\Todo::orderBy('created_at' , 'desc')->get();
+        $todos = \App\Models\Todo::where('user_id' , Auth::id())
+									->orderBy('created_at' , 'desc')
+									->get();
         return view('index')->with('todos' , $todos);
     }
 
@@ -50,6 +53,7 @@ class TodoController extends Controller
         $todo->title = $request->input('new_todo_title');
         $todo->due = $request->input('new_todo_due');
         $todo->content = $request->input('new_todo_content');
+		$todo->user_id = Auth::id();
         $todo->save();
 
         return redirect('/')->with('success' , 'Todo created successfully!');
@@ -64,8 +68,10 @@ class TodoController extends Controller
     public function show($id)
     {
         $todo = \App\Models\Todo::find($id);
-
-        return view('show')->with('todo',$todo);
+		if($todo->user_id != Auth::id()){
+			redirect('/')->withErrors(['auth'=> 'You do not have access to the requested todo.']);
+		}
+		return view('show')->with('todo',$todo);
     }
 
     /**
@@ -77,7 +83,13 @@ class TodoController extends Controller
     public function edit($id)
     {
         $todo = \App\Models\Todo::find($id);
-        return view('edit')->with('todo',$todo);
+		
+		if($todo->user_id == Auth::id()){
+			return view('edit')->with('todo',$todo);
+		}else{
+			redirect('/')->withErrors(['auth'=> 'You do not have access to the requested todo.']);
+		}
+        
     }
 
     /**
@@ -100,6 +112,11 @@ class TodoController extends Controller
         ]);
 
         $todo = \App\Models\Todo::find($id);
+		
+		if($todo->user_id != Auth::id()){
+			redirect('/')->withErrors(['auth'=> 'You do not have access to the requested todo.']);
+		}
+		
         $todo->title = $request->input('new_todo_title');
         $todo->due = $request->input('new_todo_due');
         $todo->content = $request->input('new_todo_content');
@@ -117,6 +134,9 @@ class TodoController extends Controller
     public function destroy($id)
     {
         $todo = \App\Models\Todo::find($id);
+		if($todo->user_id != Auth::id()){
+			redirect('/')->withErrors(['auth'=> 'You do not have access to the requested todo.']);
+		}
         $todo->delete();
         return redirect('/')->with('success' , 'Todo deleted successfully!');
 
