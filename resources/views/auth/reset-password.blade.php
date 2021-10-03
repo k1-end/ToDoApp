@@ -3,8 +3,9 @@
 
 @section('content')
 <div class="d-flex p-2 justify-content-center">
-    <form class="form-signup text-center" method="POST" action="signup">
+    <form class="form-signup text-center" method="POST" action="{{url('reset-password')}}">
       @csrf  
+      <input type="hidden" value="{{$token}}" name="token">
       <label for="inputEmail" class="sr-only">Email address</label>
       <input type="email" id="inputEmail" class="form-control mb-3 " placeholder="Email address" required="" autofocus="" name="email">
       <label for="inputPassword" class="sr-only">Password</label>
@@ -13,7 +14,8 @@
       <label for="inputPassword" class="sr-only">Confirm Password</label>
       <input type="password" id="inputPassword" class="form-control mb-3 " placeholder="Confirm Password" required="" name="password_confirmation">
 
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Reset password</button>
     </form>
 </div>
 @endsection

@@ -28,3 +28,13 @@ Route::get('signup' , [AuthController::class , 'signupPage']);
 Route::post('signup' , [AuthController::class , 'register']);
 
 Route::get('logout', [AuthController::class , 'logout']);
+
+Route::get('/forgot-password',[AuthController::class , 'forgotPasswordPage'])->middleware('guest')->name('password.request');
+
+
+Route::post('/forgot-password', [AuthController::class , 'sendResestLink'])->middleware('guest')->name('password.email');
+
+
+Route::get('/reset-password/{token}',  [AuthController::class , 'resetPasswordPage'] )->middleware('guest')->name('password.reset');
+
+Route::post('/reset-password', [AuthController::class , 'resetPassword'])->middleware('guest')->name('password.update');

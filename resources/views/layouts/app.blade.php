@@ -8,9 +8,9 @@
     <title>Todo</title>
 </head>
 <body>
-    @if(Auth::check())
-        @include('inc.nav')
-    @endif
+   
+	@include('inc.nav')
+    
     @include('inc.msg')
     <div class="container">
     @yield('content')
