@@ -10,6 +10,12 @@
       <label for="inputPassword" class="sr-only">Password</label>
       <input type="password" id="inputPassword" class="form-control mb-3 " placeholder="Password" required="" name="password">
       <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+	  <div class="form-check">
+		  <input class="form-check-input" type="checkbox" value="1" name="remember">
+		  <label class="form-check-label" >
+			Remeber Me!
+		  </label>
+	  </div>
       <a href="/signup" class="btn btn-lg btn-primary btn-block">Sign Up</a>
       <a href="/forgot-password" class="btn btn-lg btn-primary btn-block">Forget your password?</a>
     </form>

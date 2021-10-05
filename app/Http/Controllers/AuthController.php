@@ -28,8 +28,14 @@ class AuthController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
+		
+		$remember = false;
+		
+		if($request->input('remember') === '1'){
+			$remember = true;
+		}
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials , $remember)) {
             $request->session()->regenerate();
 
             return redirect('/');
