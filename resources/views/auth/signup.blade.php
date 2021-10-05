@@ -5,6 +5,7 @@
 <div class="d-flex p-2 justify-content-center">
     <form class="form-signup text-center" method="POST" action="signup">
       @csrf  
+	  <h1 class="h3 mb-3 font-weight-normal">Sign up for a new account</h1>
       <label for="inputEmail" class="sr-only">Email address</label>
       <input type="email" id="inputEmail" class="form-control mb-3 " placeholder="Email address" required="" autofocus="" name="email">
       <label for="inputPassword" class="sr-only">Password</label>

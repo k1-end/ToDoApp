@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+	<a class="navbar-brand" href="/">TodoApp</a>
   <div id="navbarSupportedContent">
     <ul class="navbar-nav d-inline-flex ">
     <?php $route = Illuminate\Support\Facades\Route::current();?>
@@ -13,8 +14,6 @@
         <a class="nav-link" href="/logout">Logout</a>
       </li>
 		@endif
-      
-      
     </ul>
   </div>
 </nav>
