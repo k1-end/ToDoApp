@@ -38,3 +38,38 @@ Route::post('/forgot-password', [AuthController::class , 'sendResestLink'])->mid
 Route::get('/reset-password/{token}',  [AuthController::class , 'resetPasswordPage'] )->middleware('guest')->name('password.reset');
 
 Route::post('/reset-password', [AuthController::class , 'resetPassword'])->middleware('guest')->name('password.update');
+
+Route::get('/ajax/done/{id}/{check}' , function( $id , $check)
+{
+	$todo = \App\Models\Todo::find($id);
+	if($todo->user_id != Auth::id()){
+		return 'You do not have access to the requested todo.';
+	}
+	if($check === 'true'){
+		$todo->done = 1;
+	}elseif($check === 'false'){
+		$todo->done = 0;
+	}else{
+		return 'Unvalid url.';
+	}
+	$todo->save();
+	
+	return 'Successfull';
+	
+});
+
+Route::get('/ajax/show_completed/{show}' , function($show)
+{
+	$user = \App\Models\User::find(Auth::id());
+	if($show === 'true'){
+		$user->show_completed = 1;
+	}elseif($show === 'false'){
+		$user->show_completed = 0;
+	}else{
+		return 'Unvalid url.';
+	}
+	$user->save();
+	
+	return 'Successfull';
+	
+});

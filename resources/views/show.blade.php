@@ -3,6 +3,7 @@
 @section('content')
 <h2> {{$todo->title}} </h2>
 
+<br>
 <span class="badge badge-info">{{$todo->due}}</span>
 
 <p>{{$todo->content}}</p>

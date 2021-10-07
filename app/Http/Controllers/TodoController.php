@@ -54,6 +54,7 @@ class TodoController extends Controller
         $todo->due = $request->input('new_todo_due');
         $todo->content = $request->input('new_todo_content');
 		$todo->user_id = Auth::id();
+		$todo->done = false;
         $todo->save();
 
         return redirect('/')->with('success' , 'Todo created successfully!');

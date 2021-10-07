@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddUserIdToTodosTable extends Migration
+class AddShowCompeletedToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddUserIdToTodosTable extends Migration
      */
     public function up()
     {
-        Schema::table('todos', function (Blueprint $table) {
-            $table->foreignIdFor(\App\Models\User::class);
+        Schema::table('users', function (Blueprint $table) {
+            $table->boolean('show_completed');
         });
     }
 
@@ -25,8 +25,8 @@ class AddUserIdToTodosTable extends Migration
      */
     public function down()
     {
-        Schema::table('todos', function (Blueprint $table) {
-            $table->dropColumn('user_id');
+        Schema::table('users', function (Blueprint $table) {
+			$table->dropColumn('show_completed');
         });
     }
 }
