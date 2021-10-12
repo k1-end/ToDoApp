@@ -72,4 +72,4 @@ Route::get('/ajax/show_completed/{show}' , function($show)
 	
 	return 'Successfull';
 	
-});
+})->middleware('demoUser');

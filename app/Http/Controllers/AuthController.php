@@ -65,6 +65,7 @@ class AuthController extends Controller
         $user->name = $request->input('email');
         $user->email = $request->input('email');
         $user->password=bcrypt($request->input('password'));
+		$user->show_completed = 0;
         $user->save();
 
         return redirect('/')->with('success' , 'User created successfully!');

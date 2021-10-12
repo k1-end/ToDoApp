@@ -8,6 +8,16 @@ use Illuminate\Support\Facades\Auth;
 
 class TodoController extends Controller
 {
+	/**
+     * Instantiate a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        
+        $this->middleware('demoUser')->except(['index' , 'create' , 'show']);
+    }
     /**
      * Display a listing of the resource.
      *
